@@ -5,126 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HappyPaws Хотел за Кучета — Доверена грижа 24/7</title>
   <meta name="description" content="Модерен хотел за кучета: 24/7 грижа, живи камери, целодневна игра, индивидуални стаи. Онлайн резервация за секунди.">
-  <link rel="preconnect" href="https://maps.googleapis.com" />
+
   <style>
+    /* ===== Светла, топла и мека палитра ===== */
     :root{
-      --bg:#0f172a;        /* slate-900 */
-      --card:#111827ee;    /* neutral with alpha */
-      --muted:#94a3b8;     /* slate-400 */
-      --primary:#22c55e;   /* green-500 */
-      --primary-700:#15803d;
-      --accent:#38bdf8;    /* sky-400 */
-      --ring:#ffffff22;
-      --text:#e5e7eb;      /* zinc-200 */
-      --soft:#1f2937;      /* gray-800 */
-      --ok:#10b981;
-      --warn:#f59e0b;
-      --err:#ef4444;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
+      --bg:#fffaf5;          /* крем */
+      --bg-2:#fff4ea;        /* бледо прасковено */
+      --bg-3:#fff0e0;        /* още по-топъл нюанс за акценти */
+      --card:#ffffff;        /* чисто бяло за карти */
+      --line:#f2e6d9;        /* деликатна линия */
+      --text:#2d2a26;        /* топъл тъмнокафяво-сив */
+      --muted:#6b625a;       /* по-мек текст */
+      --primary:#f59e0b;     /* топло оранжево */
+      --primary-700:#d97706; /* по-тъмно оранжево */
+      --accent:#eab308;      /* златист акцент */
+      --ok:#10b981;          /* зелено за статус */
+      --radius:16px;
+      --shadow:0 6px 24px rgba(130, 93, 40, .08);
+      --ring:0 0 0 6px rgba(245, 158, 11, .15);
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;background:linear-gradient(180deg,#0b1224 0%,#0f172a 40%,#0b1224 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;scroll-behavior:smooth}
-    a{color:var(--accent);text-decoration:none}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;scroll-behavior:smooth}
+    a{color:#9a6b00;text-decoration:none}
+    a:hover{text-decoration:underline}
     img{max-width:100%;display:block}
     .container{width:min(1100px,92vw);margin-inline:auto}
-    .nav{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(10px);background:#0b1224cc;border-bottom:1px solid #1f2a44;z-index:50}
+
+    /* ===== Навигация (светла) ===== */
+    .nav{position:sticky;top:0;background:rgba(255,250,245,.8);backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--line);z-index:50}
     .nav .row{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
     .brand{display:flex;gap:10px;align-items:center}
     .brand .logo{width:40px;height:40px;border-radius:12px;background:
-      radial-gradient(40% 40% at 30% 30%, #34d399 0%, transparent 70%),
-      radial-gradient(50% 50% at 70% 60%, #60a5fa 0%, transparent 70%),
-      #0ea5e9;box-shadow:0 6px 16px #0ea5e977 inset, 0 6px 24px #22c55e55}
+      radial-gradient(40% 40% at 30% 30%, #fde68a 0%, transparent 70%),
+      radial-gradient(50% 50% at 70% 60%, #fca5a5 0%, transparent 70%),
+      #f59e0b;box-shadow:inset 0 6px 14px #fbbf2450, 0 6px 20px #f59e0b22}
     .brand h1{font-size:18px;margin:0;letter-spacing:.3px}
     .menu{display:flex;gap:18px;align-items:center}
     .menu a{padding:8px 10px;border-radius:10px}
-    .menu a:hover{background:#ffffff12}
-    .cta{background:var(--primary);color:#001b0e;padding:10px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px #22c55e44;border:1px solid #ffffff22}
-    .cta:hover{background:var(--primary-700);color:#eafff4}
+    .menu a:hover{background:#fff1dc}
+    .cta{background:var(--primary);color:#fff;padding:10px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px #f59e0b33;border:1px solid #f4c984}
+    .cta:hover{background:var(--primary-700)}
     .burger{display:none}
     @media (max-width:880px){
       .menu{display:none}
-      .burger{display:block;background:#ffffff10;border:1px solid #ffffff22;padding:8px 10px;border-radius:10px}
-      .mobile{display:none;position:absolute;left:0;right:0;top:60px;background:#0b1224ee;border-bottom:1px solid #1f2a44}
-      .mobile a{display:block;padding:14px 20px;border-top:1px solid #1a2340}
+      .burger{display:block;background:#fff;border:1px solid var(--line);padding:8px 10px;border-radius:10px}
+      .mobile{display:none;position:absolute;left:0;right:0;top:60px;background:#fffaf5;border-bottom:1px solid var(--line)}
+      .mobile a{display:block;padding:14px 20px;border-top:1px solid var(--line)}
       .mobile .cta{margin:12px 16px}
     }
 
-    /* Hero */
-    .hero{position:relative;isolation:isolate}
+    /* ===== Hero (светъл) ===== */
+    .hero{position:relative}
     .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;padding:44px 0 32px}
-    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a385d;background:#0c1a35aa;padding:6px 10px;border-radius:999px;font-size:12px;color:#bcd1ff}
-    .badge .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);box-shadow:0 0 10px var(--ok)}
-    .hero h2{font-size:44px;line-height:1.04;margin:14px 0 10px}
+    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:#fffdf8;padding:6px 10px;border-radius:999px;font-size:12px;color:#8a7a69}
+    .badge .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+    .hero h2{font-size:44px;line-height:1.08;margin:14px 0 10px;color:#1f1b16}
     .hero p{color:var(--muted);font-size:18px}
-    .hero .card{background:linear-gradient(180deg,#101b35,#0c152b);border:1px solid #213055;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .hero .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
     .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-    .chip{display:flex;gap:10px;align-items:center;background:#0f1e3b;border:1px solid #243458;color:#cfe2ff;padding:10px;border-radius:12px}
-    .chip .tick{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #34d399 0 60%, #0ea5e9 61% 100%)}
-    .hero media-picture{display:block}
-    .hero .media{position:relative;overflow:hidden;border-radius:20px;border:1px solid #1e2b49}
-    .hero .media::after{content:"Live Cam";position:absolute;top:10px;left:10px;background:#111827cc;border:1px solid #2b3a64;color:#cbd5e1;padding:4px 8px;border-radius:999px;font-size:12px}
-    .hero video,.hero img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;filter:saturate(1.05) contrast(1.05);}
+    .chip{display:flex;gap:10px;align-items:center;background:#fff3e0;border:1px solid #f6e7cf;color:#7b5b2e;padding:10px;border-radius:12px}
+    .chip .tick{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #f59e0b 0 60%, #fde68a 61% 100%)}
+    .hero .media{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:#fff}
+    .hero .media::after{content:"Live Cam";position:absolute;top:10px;left:10px;background:#fff8ee;border:1px solid var(--line);color:#7b5b2e;padding:4px 8px;border-radius:999px;font-size:12px}
+    .hero video,.hero img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;filter:saturate(1.02) contrast(1.02)}
 
     @media (max-width:980px){
       .hero .wrap{grid-template-columns:1fr;gap:18px;padding-top:24px}
       .hero h2{font-size:34px}
     }
 
-    /* Sections */
-    section{padding:40px 0;border-top:1px solid #1a2340}
-    h3{font-size:28px;margin:0 0 14px}
+    /* ===== Секции ===== */
+    section{padding:40px 0;border-top:1px solid var(--line)}
+    section:nth-of-type(odd){background:var(--bg)}
+    section:nth-of-type(even){background:var(--bg-2)}
+    h3{font-size:28px;margin:0 0 14px;color:#2a241c}
     .lead{color:var(--muted)}
+
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:linear-gradient(180deg,#0c152b,#0a1325);border:1px solid #1e2b49;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
-    .card h4{margin:0 0 8px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .card h4{margin:0 0 8px;color:#2a241c}
     .row{display:flex;gap:12px;align-items:center}
-    .pill{font-size:12px;border:1px solid #28406a;padding:4px 8px;border-radius:999px;background:#102142aa}
+    .pill{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;background:#fff7ee;color:#6a4e18}
     @media (max-width:900px){.cards{grid-template-columns:1fr}}
 
-    /* Pricing */
+    /* ===== Цени ===== */
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .price .tag{font-size:13px;color:#cbd5e1}
-    .price .num{font-size:36px;font-weight:800}
-    .price ul{padding-left:18px;margin:10px 0;color:#cbd5e1}
+    .price .tag{font-size:13px;color:#7a6a56}
+    .price .num{font-size:36px;font-weight:800;color:#1f1b16}
+    .price ul{padding-left:18px;margin:10px 0;color:#5f564b}
     .price li{margin:6px 0}
-    .popular{outline:2px solid #22c55e55}
+    .popular{outline:2px solid #f59e0b33}
 
-    /* Gallery */
+    /* ===== Галерия ===== */
     .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .gallery img{border-radius:12px;border:1px solid #203157}
+    .gallery img{border-radius:12px;border:1px solid var(--line);background:#fff}
     @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
 
-    /* FAQ */
-    .faq details{border:1px solid #203157;border-radius:12px;background:#0e1a33;padding:12px;margin:10px 0}
+    /* ===== FAQ ===== */
+    .faq details{border:1px solid var(--line);border-radius:12px;background:#fffdf9;padding:12px;margin:10px 0}
     .faq summary{cursor:pointer;font-weight:600}
-    .faq p{color:#cbd5e1}
+    .faq p{color:#5f564b}
 
-    /* Form */
+    /* ===== Формуляр ===== */
     form{display:grid;gap:12px}
-    input,select,textarea{background:#0b1530;border:1px solid #22345f;color:var(--text);padding:12px;border-radius:12px;outline:0}
-    input:focus,select:focus,textarea:focus{border-color:#3b82f6;box-shadow:0 0 0 6px var(--ring)}
+    input,select,textarea{background:#fff;border:1px solid var(--line);color:var(--text);padding:12px;border-radius:12px;outline:0}
+    input:focus,select:focus,textarea:focus{border-color:#f59e0b;box-shadow:var(--ring)}
     .inline{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     @media (max-width:700px){.inline{grid-template-columns:1fr}}
     .agree{display:flex;gap:8px;align-items:flex-start}
-    .notice{font-size:12px;color:#9fb3d9}
+    .notice{font-size:12px;color:#7a6a56}
     .success,.error{display:none;margin-top:8px;padding:10px;border-radius:10px}
-    .success{background:#052e26;border:1px solid #0c5d4c;color:#bffae8}
-    .error{background:#3a0e14;border:1px solid #7f1d1d;color:#ffe1e1}
+    .success{background:#eafaf3;border:1px solid #b6e7d0;color:#0f5132}
+    .error{background:#fff0f0;border:1px solid #f6c2c2;color:#7f1d1d}
 
-    /* Sticky mini-CTA */
-    .sticky-cta{position:fixed;right:14px;bottom:14px;z-index:40;display:flex;gap:8px;align-items:center;background:#0f1e3b;border:1px solid #29406d;padding:10px 12px;border-radius:999px;box-shadow:var(--shadow)}
-    .sticky-cta .dot{width:10px;height:10px;border-radius:999px;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    /* ===== Sticky mini-CTA ===== */
+    .sticky-cta{position:fixed;right:14px;bottom:14px;z-index:40;display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:999px;box-shadow:var(--shadow)}
+    .sticky-cta .dot{width:10px;height:10px;border-radius:999px;background:var(--ok)}
     .hidden{display:none}
 
-    /* Footer */
-    footer{padding:26px 0;color:#9fb3d9}
+    /* ===== Footer ===== */
+    footer{padding:26px 0;color:#7a6a56;background:var(--bg-3);border-top:1px solid var(--line)}
     .footgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
     @media (max-width:900px){.footgrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <!-- Nav -->
+  <!-- Навигация -->
   <nav class="nav">
     <div class="container row">
       <div class="brand">
@@ -155,11 +162,11 @@
       <div>
         <span class="badge"><span class="dot"></span> 24/7 грижа • Живи камери • Ветеринар на повикване</span>
         <h2>Място, където вашето куче се чувства като у дома—но с повече игра.</h2>
-        <p class="lead">Целодневна игра в контролирана среда, индивидуални стаи за почивка, професионални гледачи и опция за live cam — всичко в един модерен хотел за кучета.</p>
+        <p class="lead">Целодневна игра в контролирана среда, индивидуални стаи за почивка, професионални гледачи и опция за live cam — всичко в светъл и уютен хотел за кучета.</p>
         <div class="grid">
           <div class="chip"><span class="tick" aria-hidden="true"></span>Целодневна игра (8–10 ч.)</div>
           <div class="chip"><span class="tick" aria-hidden="true"></span>Живи камери за родителите</div>
-          <div class="chip"><span class="tick" aria-hidden="true"></span>Климатизирани зали вътре/вън</div>
+          <div class="chip"><span class="tick" aria-hidden="true"></span>Климатизирани зони вътре/вън</div>
           <div class="chip"><span class="tick" aria-hidden="true"></span>Медикаменти без доп. такса</div>
         </div>
         <p style="margin-top:10px">
@@ -174,7 +181,7 @@
     </div>
   </header>
 
-  <!-- Services -->
+  <!-- Услуги -->
   <section id="services">
     <div class="container">
       <h3>Услуги и удобства</h3>
@@ -182,13 +189,13 @@
       <div class="cards">
         <article class="card">
           <h4>Нощувка + Daycare</h4>
-          <p>Всяка нощувка включва пълен ден игра в група, индивидуална кабина с легло и вечерен „кампфайър“ лакомства.</p>
-          <div class="row"><span class="pill">24/7 мониторинг</span><span class="pill">Тишина за сън</span></div>
+          <p>Всяка нощувка включва пълен ден игра в група, индивидуална кабина с легло и вечерни лакомства.</p>
+          <div class="row"><span class="pill">24/7 мониторинг</span><span class="pill">Тиха зона за сън</span></div>
         </article>
         <article class="card">
           <h4>Дневна грижа</h4>
-          <p>8–10 часа отворена игра, мозъчни игри за маниери и почивки при нужда. Надзор от обучени „Canine Coaches“.</p>
-          <div class="row"><span class="pill">Групи по темперамент</span><span class="pill">Чистота & хигиена</span></div>
+          <p>8–10 часа отворена игра, мозъчни игри и почивки при нужда. Надзор от обучени „Canine Coaches“.</p>
+          <div class="row"><span class="pill">Групи по темперамент</span><span class="pill">Хигиена</span></div>
         </article>
         <article class="card">
           <h4>Live Cam достъп</h4>
@@ -197,8 +204,8 @@
         </article>
         <article class="card">
           <h4>Груминг & СПА</h4>
-          <p>Къпанe, сушене, подстригване, почистване на уши и нокти. Може да се комбинира с престой.</p>
-          <div class="row"><span class="pill">Комбо пакети</span><span class="pill">Спа добавки</span></div>
+          <p>Къпанe, сушене, подстригване, почистване на уши и нокти. Комбинира се с престой.</p>
+          <div class="row"><span class="pill">Комбо пакети</span><span class="pill">СПА добавки</span></div>
         </article>
         <article class="card">
           <h4>Администрация на медикаменти</h4>
@@ -214,7 +221,7 @@
     </div>
   </section>
 
-  <!-- Pricing -->
+  <!-- Цени -->
   <section id="pricing">
     <div class="container">
       <h3>Цени и пакети</h3>
@@ -258,7 +265,7 @@
     </div>
   </section>
 
-  <!-- Gallery -->
+  <!-- Галерия -->
   <section id="gallery">
     <div class="container">
       <h3>Галерия</h3>
@@ -278,12 +285,12 @@
       <h3>Live Cam</h3>
       <p class="lead">Погледнете как тече играта в реално време. (Демо плейсхолдър — в продукция вграждаме вашия RTSP/HLS поток.)</p>
       <div class="card">
-        <div style="aspect-ratio:16/9;background:#0c152b url('https://images.unsplash.com/photo-1558944351-c0c8f5a925b8?q=80&w=1200&auto=format&fit=crop') center/cover;border-radius:12px;border:1px solid #1e2b49"></div>
+        <div style="aspect-ratio:16/9;border-radius:12px;border:1px solid var(--line);background:#fff url('https://images.unsplash.com/photo-1558944351-c0c8f5a925b8?q=80&w=1200&auto=format&fit=crop') center/cover"></div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Отзиви -->
   <section id="testimonials">
     <div class="container">
       <h3>Какво казват стопаните</h3>
@@ -332,7 +339,7 @@
     </div>
   </section>
 
-  <!-- Booking -->
+  <!-- Резервация -->
   <section id="booking">
     <div class="container">
       <h3>Онлайн резервация</h3>
@@ -405,7 +412,7 @@
     </div>
   </section>
 
-  <!-- Location -->
+  <!-- Локация -->
   <section id="location">
     <div class="container">
       <h3>Локация и контакт</h3>
@@ -414,7 +421,7 @@
         <div class="card">
           <h4>Навигация</h4>
           <p><a href="https://maps.google.com" target="_blank" rel="noopener">Отвори в Google Maps →</a></p>
-          <div style="aspect-ratio:16/9;border-radius:12px;border:1px solid #1e2b49;background:#0b1530 url('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1200&auto=format&fit=crop') center/cover"></div>
+          <div style="aspect-ratio:16/9;border-radius:12px;border:1px solid var(--line);background:#fff url('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1200&auto=format&fit=crop') center/cover"></div>
         </div>
         <div class="card">
           <h4>Контакти</h4>
@@ -425,6 +432,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="container footgrid">
       <div>
@@ -470,7 +478,7 @@
   </script>
 
   <script>
-    // Година
+    // Текуща година
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Мобилно меню
@@ -509,7 +517,7 @@
         const el = document.getElementById(id);
         const isCheck = el.type === 'checkbox';
         const good = isCheck ? el.checked : !!el.value;
-        el.style.borderColor = good ? '#22345f' : '#ef4444';
+        el.style.borderColor = good ? 'var(--line)' : '#ef4444';
         if(!good) ok = false;
       });
       if(ok && !validDateRange()){
