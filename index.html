@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HappyPaws Хотел за Кучета — Доверена грижа 24/7</title>
+  <meta name="description" content="Модерен хотел за кучета: 24/7 грижа, живи камери, целодневна игра, индивидуални стаи. Онлайн резервация за секунди.">
+  <link rel="preconnect" href="https://maps.googleapis.com" />
+  <style>
+    :root{
+      --bg:#0f172a;        /* slate-900 */
+      --card:#111827ee;    /* neutral with alpha */
+      --muted:#94a3b8;     /* slate-400 */
+      --primary:#22c55e;   /* green-500 */
+      --primary-700:#15803d;
+      --accent:#38bdf8;    /* sky-400 */
+      --ring:#ffffff22;
+      --text:#e5e7eb;      /* zinc-200 */
+      --soft:#1f2937;      /* gray-800 */
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --err:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#0b1224 0%,#0f172a 40%,#0b1224 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;scroll-behavior:smooth}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px,92vw);margin-inline:auto}
+    .nav{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(10px);background:#0b1224cc;border-bottom:1px solid #1f2a44;z-index:50}
+    .nav .row{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand .logo{width:40px;height:40px;border-radius:12px;background:
+      radial-gradient(40% 40% at 30% 30%, #34d399 0%, transparent 70%),
+      radial-gradient(50% 50% at 70% 60%, #60a5fa 0%, transparent 70%),
+      #0ea5e9;box-shadow:0 6px 16px #0ea5e977 inset, 0 6px 24px #22c55e55}
+    .brand h1{font-size:18px;margin:0;letter-spacing:.3px}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:8px 10px;border-radius:10px}
+    .menu a:hover{background:#ffffff12}
+    .cta{background:var(--primary);color:#001b0e;padding:10px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 20px #22c55e44;border:1px solid #ffffff22}
+    .cta:hover{background:var(--primary-700);color:#eafff4}
+    .burger{display:none}
+    @media (max-width:880px){
+      .menu{display:none}
+      .burger{display:block;background:#ffffff10;border:1px solid #ffffff22;padding:8px 10px;border-radius:10px}
+      .mobile{display:none;position:absolute;left:0;right:0;top:60px;background:#0b1224ee;border-bottom:1px solid #1f2a44}
+      .mobile a{display:block;padding:14px 20px;border-top:1px solid #1a2340}
+      .mobile .cta{margin:12px 16px}
+    }
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate}
+    .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;padding:44px 0 32px}
+    .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a385d;background:#0c1a35aa;padding:6px 10px;border-radius:999px;font-size:12px;color:#bcd1ff}
+    .badge .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .hero h2{font-size:44px;line-height:1.04;margin:14px 0 10px}
+    .hero p{color:var(--muted);font-size:18px}
+    .hero .card{background:linear-gradient(180deg,#101b35,#0c152b);border:1px solid #213055;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .chip{display:flex;gap:10px;align-items:center;background:#0f1e3b;border:1px solid #243458;color:#cfe2ff;padding:10px;border-radius:12px}
+    .chip .tick{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #34d399 0 60%, #0ea5e9 61% 100%)}
+    .hero media-picture{display:block}
+    .hero .media{position:relative;overflow:hidden;border-radius:20px;border:1px solid #1e2b49}
+    .hero .media::after{content:"Live Cam";position:absolute;top:10px;left:10px;background:#111827cc;border:1px solid #2b3a64;color:#cbd5e1;padding:4px 8px;border-radius:999px;font-size:12px}
+    .hero video,.hero img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;filter:saturate(1.05) contrast(1.05);}
+
+    @media (max-width:980px){
+      .hero .wrap{grid-template-columns:1fr;gap:18px;padding-top:24px}
+      .hero h2{font-size:34px}
+    }
+
+    /* Sections */
+    section{padding:40px 0;border-top:1px solid #1a2340}
+    h3{font-size:28px;margin:0 0 14px}
+    .lead{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:linear-gradient(180deg,#0c152b,#0a1325);border:1px solid #1e2b49;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .card h4{margin:0 0 8px}
+    .row{display:flex;gap:12px;align-items:center}
+    .pill{font-size:12px;border:1px solid #28406a;padding:4px 8px;border-radius:999px;background:#102142aa}
+    @media (max-width:900px){.cards{grid-template-columns:1fr}}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .price .tag{font-size:13px;color:#cbd5e1}
+    .price .num{font-size:36px;font-weight:800}
+    .price ul{padding-left:18px;margin:10px 0;color:#cbd5e1}
+    .price li{margin:6px 0}
+    .popular{outline:2px solid #22c55e55}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery img{border-radius:12px;border:1px solid #203157}
+    @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+
+    /* FAQ */
+    .faq details{border:1px solid #203157;border-radius:12px;background:#0e1a33;padding:12px;margin:10px 0}
+    .faq summary{cursor:pointer;font-weight:600}
+    .faq p{color:#cbd5e1}
+
+    /* Form */
+    form{display:grid;gap:12px}
+    input,select,textarea{background:#0b1530;border:1px solid #22345f;color:var(--text);padding:12px;border-radius:12px;outline:0}
+    input:focus,select:focus,textarea:focus{border-color:#3b82f6;box-shadow:0 0 0 6px var(--ring)}
+    .inline{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:700px){.inline{grid-template-columns:1fr}}
+    .agree{display:flex;gap:8px;align-items:flex-start}
+    .notice{font-size:12px;color:#9fb3d9}
+    .success,.error{display:none;margin-top:8px;padding:10px;border-radius:10px}
+    .success{background:#052e26;border:1px solid #0c5d4c;color:#bffae8}
+    .error{background:#3a0e14;border:1px solid #7f1d1d;color:#ffe1e1}
+
+    /* Sticky mini-CTA */
+    .sticky-cta{position:fixed;right:14px;bottom:14px;z-index:40;display:flex;gap:8px;align-items:center;background:#0f1e3b;border:1px solid #29406d;padding:10px 12px;border-radius:999px;box-shadow:var(--shadow)}
+    .sticky-cta .dot{width:10px;height:10px;border-radius:999px;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+    .hidden{display:none}
+
+    /* Footer */
+    footer{padding:26px 0;color:#9fb3d9}
+    .footgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
+    @media (max-width:900px){.footgrid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container row">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>HappyPaws Хотел</h1>
+      </div>
+      <div class="menu" id="menu">
+        <a href="#services">Услуги</a>
+        <a href="#pricing">Цени</a>
+        <a href="#gallery">Галерия</a>
+        <a href="#faq">FAQ</a>
+        <a href="#booking" class="cta">Онлайн резервация</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+    </div>
+    <div class="mobile container" id="mobile">
+      <a href="#services">Услуги</a>
+      <a href="#pricing">Цени</a>
+      <a href="#gallery">Галерия</a>
+      <a href="#faq">FAQ</a>
+      <a href="#booking" class="cta">Онлайн резервация</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container wrap">
+      <div>
+        <span class="badge"><span class="dot"></span> 24/7 грижа • Живи камери • Ветеринар на повикване</span>
+        <h2>Място, където вашето куче се чувства като у дома—но с повече игра.</h2>
+        <p class="lead">Целодневна игра в контролирана среда, индивидуални стаи за почивка, професионални гледачи и опция за live cam — всичко в един модерен хотел за кучета.</p>
+        <div class="grid">
+          <div class="chip"><span class="tick" aria-hidden="true"></span>Целодневна игра (8–10 ч.)</div>
+          <div class="chip"><span class="tick" aria-hidden="true"></span>Живи камери за родителите</div>
+          <div class="chip"><span class="tick" aria-hidden="true"></span>Климатизирани зали вътре/вън</div>
+          <div class="chip"><span class="tick" aria-hidden="true"></span>Медикаменти без доп. такса</div>
+        </div>
+        <p style="margin-top:10px">
+          <a class="cta" href="#booking">Резервирай дата</a>
+          &nbsp;<a href="#requirements">Изисквания за прием →</a>
+        </p>
+      </div>
+      <div class="card media">
+        <!-- Placeholder за live stream/видео -->
+        <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=80&w=1200&auto=format&fit=crop" alt="Играещи кучета в закрита зала">
+      </div>
+    </div>
+  </header>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h3>Услуги и удобства</h3>
+      <p class="lead">Разделяме по размер, темперамент и стил на игра. Сигурна среда, сертифицирани гледачи и ясна дневна програма.</p>
+      <div class="cards">
+        <article class="card">
+          <h4>Нощувка + Daycare</h4>
+          <p>Всяка нощувка включва пълен ден игра в група, индивидуална кабина с легло и вечерен „кампфайър“ лакомства.</p>
+          <div class="row"><span class="pill">24/7 мониторинг</span><span class="pill">Тишина за сън</span></div>
+        </article>
+        <article class="card">
+          <h4>Дневна грижа</h4>
+          <p>8–10 часа отворена игра, мозъчни игри за маниери и почивки при нужда. Надзор от обучени „Canine Coaches“.</p>
+          <div class="row"><span class="pill">Групи по темперамент</span><span class="pill">Чистота & хигиена</span></div>
+        </article>
+        <article class="card">
+          <h4>Live Cam достъп</h4>
+          <p>Проверете вашето куче в реално време през уеб или мобилно приложение.</p>
+          <div class="row"><span class="pill">За родители</span><span class="pill">iOS/Android</span></div>
+        </article>
+        <article class="card">
+          <h4>Груминг & СПА</h4>
+          <p>Къпанe, сушене, подстригване, почистване на уши и нокти. Може да се комбинира с престой.</p>
+          <div class="row"><span class="pill">Комбо пакети</span><span class="pill">Спа добавки</span></div>
+        </article>
+        <article class="card">
+          <h4>Администрация на медикаменти</h4>
+          <p>Даване на лекарства според предписание. Наблюдение и запис.</p>
+          <div class="row"><span class="pill">Без доп. такса</span><span class="pill">Ветеринар на повикване</span></div>
+        </article>
+        <article class="card">
+          <h4 id="requirements">Изисквания за прием</h4>
+          <p>Задължителни ваксини (DHPP, Бяс, Bordetella), обезпаразитяване, социализирано поведение. Нужен е петпаспорт.</p>
+          <div class="row"><span class="pill">Оценка при първо посещение</span><span class="pill">Без агресия</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <h3>Цени и пакети</h3>
+      <p class="lead">Прозрачни пакети. Отстъпки за второ куче и за дълъг престой.</p>
+      <div class="pricing">
+        <div class="card price">
+          <div class="tag">Daycare</div>
+          <div class="num">39 лв</div>
+          <div class="tag">на ден</div>
+          <ul>
+            <li>8–10 ч. групова игра</li>
+            <li>Живи камери</li>
+            <li>Проверка „Добро поведение“</li>
+          </ul>
+          <p><a class="cta" href="#booking">Запази ден</a></p>
+        </div>
+        <div class="card price popular">
+          <div class="tag">Нощувка + Daycare</div>
+          <div class="num">79 лв</div>
+          <div class="tag">на нощ</div>
+          <ul>
+            <li>Дневна игра включена</li>
+            <li>Индивидуална кабина</li>
+            <li>Вечерни лакомства</li>
+          </ul>
+          <p><a class="cta" href="#booking">Резервирай</a></p>
+        </div>
+        <div class="card price">
+          <div class="tag">Груминг</div>
+          <div class="num">от 45 лв</div>
+          <div class="tag">според порода</div>
+          <ul>
+            <li>Къпане и сушене</li>
+            <li>Нокти & уши</li>
+            <li>Комбо отстъпки</li>
+          </ul>
+          <p><a class="cta" href="#booking">Добави към престой</a></p>
+        </div>
+      </div>
+      <p class="notice">* Посочените цени са примерни. Актуалните се потвърждават при изпращане на заявка.</p>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <h3>Галерия</h3>
+      <p class="lead">Нашите зали за игра, външен двор и уютни кабини.</p>
+      <div class="gallery">
+        <img alt="Кучета в зала за игра" src="https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=800&auto=format&fit=crop">
+        <img alt="Външен двор за кучета" src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=800&auto=format&fit=crop">
+        <img alt="Кабини за сън" src="https://images.unsplash.com/photo-1558944351-c0c8f5a925b8?q=80&w=800&auto=format&fit=crop">
+        <img alt="Груминг студио" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800&auto=format&fit=crop">
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Cam Placeholder -->
+  <section id="live">
+    <div class="container">
+      <h3>Live Cam</h3>
+      <p class="lead">Погледнете как тече играта в реално време. (Демо плейсхолдър — в продукция вграждаме вашия RTSP/HLS поток.)</p>
+      <div class="card">
+        <div style="aspect-ratio:16/9;background:#0c152b url('https://images.unsplash.com/photo-1558944351-c0c8f5a925b8?q=80&w=1200&auto=format&fit=crop') center/cover;border-radius:12px;border:1px solid #1e2b49"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <h3>Какво казват стопаните</h3>
+      <div class="cards">
+        <div class="card">
+          <h4>„Най-накрая спя спокойно“</h4>
+          <p>Камерите са супер! Виждам как Белла си играе и е спокойна.</p>
+          <span class="pill">⭐️⭐️⭐️⭐️⭐️</span>
+        </div>
+        <div class="card">
+          <h4>Груминг + престой</h4>
+          <p>Взех си Роки чист и доволен. Персоналът е внимателен.</p>
+          <span class="pill">⭐️⭐️⭐️⭐️⭐️</span>
+        </div>
+        <div class="card">
+          <h4>Без доп. такси за лекарства</h4>
+          <p>Налага се редовно даване на медикаменти — тук това не е проблем.</p>
+          <span class="pill">⭐️⭐️⭐️⭐️⭐️</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h3>Често задавани въпроси</h3>
+      <div class="faq">
+        <details>
+          <summary>Какви ваксини са нужни?</summary>
+          <p>Изискваме DHPP, Бяс и Bordetella, както и актуално вътрешно/външно обезпаразитяване.</p>
+        </details>
+        <details>
+          <summary>Има ли следене с камери?</summary>
+          <p>Да. Предоставяме live cam достъп до залите за игра през мобилно приложение и уеб.</p>
+        </details>
+        <details>
+          <summary>Как храним кучетата?</summary>
+          <p>По ваш график и вашата храна, за да избегнем смяна на диета. Можем да осигурим и наша премиум храна.</p>
+        </details>
+        <details>
+          <summary>Давате ли медикаменти?</summary>
+          <p>Да, по предписание, без допълнителни такси.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking">
+    <div class="container">
+      <h3>Онлайн резервация</h3>
+      <p class="lead">Попълнете заявката — ще се свържем за потвърждение и депозит.</p>
+      <div class="card">
+        <form id="bookForm" novalidate>
+          <div class="inline">
+            <div>
+              <label for="owner">Име на стопанин*</label>
+              <input id="owner" name="owner" required placeholder="Иван Иванов">
+            </div>
+            <div>
+              <label for="phone">Телефон*</label>
+              <input id="phone" name="phone" required inputmode="tel" placeholder="+359...">
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label for="dog">Име на куче*</label>
+              <input id="dog" name="dog" required placeholder="Рекс">
+            </div>
+            <div>
+              <label for="breed">Порода/тегло*</label>
+              <input id="breed" name="breed" required placeholder="Средна, ~18 кг">
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label for="from">От*</label>
+              <input id="from" name="from" type="date" required>
+            </div>
+            <div>
+              <label for="to">До*</label>
+              <input id="to" name="to" type="date" required>
+            </div>
+          </div>
+          <div class="inline">
+            <div>
+              <label for="service">Услуга*</label>
+              <select id="service" name="service" required>
+                <option value="">— Изберете —</option>
+                <option>Нощувка + Daycare</option>
+                <option>Дневна грижа</option>
+                <option>Груминг</option>
+              </select>
+            </div>
+            <div>
+              <label for="extras">Екстри</label>
+              <select id="extras" name="extras" multiple>
+                <option>Live Cam достъп</option>
+                <option>Допълнителни разходки</option>
+                <option>Обучителни игри</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="notes">Бележки</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Храна, график, медикаменти, предпочитания..."></textarea>
+          </div>
+          <label class="agree">
+            <input type="checkbox" id="gdpr" required>
+            <span>Съгласен/на съм с обработката на лични данни за целите на резервацията (GDPR).*</span>
+          </label>
+          <button class="cta" type="submit">Изпрати заявка</button>
+          <div class="success" id="okMsg">✅ Заявката е изпратена (демо). Ще получите потвърждение по телефон/имейл.</div>
+          <div class="error" id="errMsg">⚠️ Моля, попълнете задължителните полета и коригирайте грешките.</div>
+          <p class="notice">С изпращането потвърждавате, че сте запознати с изискванията за прием и правилата на хотела.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location">
+    <div class="container">
+      <h3>Локация и контакт</h3>
+      <p class="lead">ул. „Пример“ 12, Банксо • Отворено всеки ден 08:00–20:00 • Дежурен 24/7</p>
+      <div class="cards">
+        <div class="card">
+          <h4>Навигация</h4>
+          <p><a href="https://maps.google.com" target="_blank" rel="noopener">Отвори в Google Maps →</a></p>
+          <div style="aspect-ratio:16/9;border-radius:12px;border:1px solid #1e2b49;background:#0b1530 url('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1200&auto=format&fit=crop') center/cover"></div>
+        </div>
+        <div class="card">
+          <h4>Контакти</h4>
+          <p>📞 <a href="tel:+359988823462">+359 98 882 3462</a><br>✉️ <a href="mailto:hello@happypaws.bg">hello@happypaws.bg</a><br>IG: <a href="#">@happypaws.bg</a></p>
+          <p><a class="cta" href="#booking">Резервация</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footgrid">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <h1>HappyPaws Хотел</h1>
+        </div>
+        <p class="notice">© <span id="year"></span> HappyPaws. Всички права запазени.</p>
+      </div>
+      <div>
+        <h4>Полезно</h4>
+        <p><a href="#requirements">Изисквания за прием</a><br><a href="#faq">ЧЗВ</a><br><a href="#live">Live Cam</a></p>
+      </div>
+      <div>
+        <h4>Правила</h4>
+        <p><a href="#">Общи условия</a><br><a href="#">Политика за поверителност</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta" id="sticky">
+    <span class="dot"></span> <a class="cta" href="#booking">Запази място</a>
+  </div>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"PetBoarding",
+    "name":"HappyPaws Хотел за Кучета",
+    "address":{"@type":"PostalAddress","addressLocality":"Банско","streetAddress":"ул. Пример 12","addressCountry":"BG"},
+    "telephone":"+359988823462",
+    "openingHours":"Mo-Su 08:00-20:00",
+    "petsAllowed":"Dogs",
+    "amenityFeature":[
+      {"@type":"LocationFeatureSpecification","name":"Live Cam","value":true},
+      {"@type":"LocationFeatureSpecification","name":"All-day play","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Medication administration","value":true}
+    ],
+    "priceRange":"BGN"
+  }
+  </script>
+
+  <script>
+    // Година
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Мобилно меню
+    const burger = document.getElementById('burger');
+    const mobile = document.getElementById('mobile');
+    burger?.addEventListener('click',()=> mobile.style.display = (mobile.style.display==='block'?'none':'block'));
+
+    // Sticky CTA показване/скриване
+    const sticky = document.getElementById('sticky');
+    const onScroll = ()=> {
+      if(window.scrollY > 600) sticky.classList.remove('hidden'); else sticky.classList.add('hidden');
+    };
+    onScroll(); window.addEventListener('scroll', onScroll);
+
+    // Валидация на формата (демо submit)
+    const form = document.getElementById('bookForm');
+    const okMsg = document.getElementById('okMsg');
+    const errMsg = document.getElementById('errMsg');
+
+    function validDateRange(){
+      const f = document.getElementById('from').value;
+      const t = document.getElementById('to').value;
+      if(!f || !t) return false;
+      const from = new Date(f), to = new Date(t);
+      return (to - from) >= 0;
+    }
+
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      errMsg.style.display = 'none';
+      okMsg.style.display = 'none';
+
+      const requiredIds = ['owner','phone','dog','breed','from','to','service','gdpr'];
+      let ok = true;
+      requiredIds.forEach(id=>{
+        const el = document.getElementById(id);
+        const isCheck = el.type === 'checkbox';
+        const good = isCheck ? el.checked : !!el.value;
+        el.style.borderColor = good ? '#22345f' : '#ef4444';
+        if(!good) ok = false;
+      });
+      if(ok && !validDateRange()){
+        ok = false;
+        document.getElementById('to').style.borderColor = '#ef4444';
+      }
+      if(ok){
+        okMsg.style.display = 'block';
+        // Тук извикайте ваш бекенд / webhook
+        form.reset();
+      } else {
+        errMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
